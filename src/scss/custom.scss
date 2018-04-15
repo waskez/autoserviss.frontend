@@ -1,0 +1,309 @@
+@import '_checkbox';
+@import '_radio';
+@import '_multiselect';
+
+$gray-light:                #b0bec5;
+$gray-lighter:              #cfd8dc;
+$gray-lightest:             #eceff1;
+
+// palēpjam nprogress spinner
+.spinner {
+	display: none !important;
+}
+
+.app-footer {
+    height: 50px;
+    justify-content: center;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+}
+
+.dropdown-toggle::after {
+    margin-left: 0.255em;
+    vertical-align: 0.15em;
+}
+
+// bootstrap 4 beta btn-secondary fix
+.btn-secondary-my {
+    color: #263238;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.btn-secondary-my:hover {
+    color: #263238;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.btn-secondary-my:active, .btn-secondary-my.active, .show > .btn-secondary-my.dropdown-toggle {
+    color: #263238;
+    background-color: #e6e6e6;
+    background-image: none;
+    border-color: #adadad;
+}
+
+/* Slider Search rezultātu forma */
+.virtual-repeater-wrapper {
+    max-height: 420px;
+    padding: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+
+      position: absolute;
+      width: 10px;
+      margin-left: -10px;
+      -webkit-appearance: none;
+    }
+
+    // &::-webkit-scrollbar-button {    }
+
+    &::-webkit-scrollbar-track {
+      background-color: lighten($gray-lightest, 5%);
+      border-right: 1px solid darken($gray-lightest, 5%);
+      border-left: 1px solid darken($gray-lightest, 5%);
+    }
+
+    // &::-webkit-scrollbar-track-piece {    }
+
+    &::-webkit-scrollbar-thumb {
+      height: 50px;
+      background-color: darken($gray-lightest, 10%);
+      background-clip: content-box;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 1px 2px;
+    }
+}
+
+/* Search repeater items stils */
+.repeater-list-item {            
+    margin-right: 4px;
+    margin-bottom: 8px;
+    padding: 8px;
+    height: 75px;
+    background: #fafafa;
+    border-radius: 0;
+    border: 1px solid $gray-lightest;            
+}
+.repeater-list-item:hover {
+    background: $gray-lightest;
+    border-color: $gray-lighter;
+}
+.repeater-list-item:active,
+.repeater-list-item.active {
+    background-color: $gray-lighter;
+    border-color: $gray-light;
+}
+.repeater-item-gravatar {
+    width: 56px;
+    height: 56px;
+	float: left;
+}
+.repeater-item-checkbox {
+    float: left;
+    margin-left: 12px;
+    line-height: 41px;
+}
+.repeater-item-body {
+    position: relative;
+    margin-left: 64px;
+    pointer-events: none;
+
+    h4 {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        overflow: hidden;        
+    }
+
+    .title-small {
+        margin-left: 6px;
+        font-size: 12px;
+    }
+
+    .second-line {
+        line-height: 1.2;
+    }
+
+    .badge {
+        margin-left: 6px;
+    }
+
+    .third-line {
+        margin-left: 6px;
+    }
+}
+
+/* Edit formu tabulas */
+.service-table thead tr th,
+.service-table tbody tr td {
+	vertical-align: middle;
+	padding: 0.3rem
+}
+
+.service-table thead tr th:first-child,
+.service-table tbody tr td:first-child {
+	width: 50px;
+	text-align: center;
+}
+
+.service-table thead tr th:last-child,
+.service-table tbody tr td:last-child {
+	width: 70px;
+	text-align: right;
+}
+
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: .5;
+  &:before {
+    content: '';
+    // use the linear-gradient for the fading effect
+    // use a solid background color for a solid bar
+    background: linear-gradient(to right, transparent, #818078, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+  }
+  &:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    color: black;
+
+    padding: 0 .5em;
+    line-height: 1.5em;
+    // this is really the only tricky part, you need to specify the background color of the container element...
+    color: #818078;
+    background-color: #fcfcfa;
+  }
+}
+
+.modal {
+	display: block !important;
+}
+
+@media (min-width: 576px){}
+.modal-dialog {
+    max-width: 600px;
+}
+
+.table-actions {
+	/* text-align: center; */
+	width: 84px;
+}
+
+.header-badge {
+	float: right;
+	margin-top: 3px;
+}
+
+.circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+}
+
+.circle-red {
+    background: red;
+}
+
+.circle-green {
+    background: green;
+}
+
+td > .circle {
+    margin: auto;
+    margin-top: 5px;
+}
+
+.btn-transparent {
+    color: #263238 !important;	
+}
+
+.btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+.aut-sort:before{
+    font-family: FontAwesome;
+    padding-right: 0.5em;
+    width: 1.28571429em;
+    display: inline-block;
+    text-align: center;
+}
+
+.aut-sortable:before{
+    content: "\f0dc";
+}
+
+.aut-asc:before{
+    content: "\f160";
+}
+
+.aut-desc:before{
+    content: "\f161";
+}
+
+/* Darbinieku saraksts */		
+
+.action-links {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.action-links li {
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+.action-links li a {
+	background: #EFF0F4;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	display: inline-block;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	color: #7A7676;
+}
+
+.action-links li a:hover {
+	background: #ff6c60;
+	color: #fff;
+}		
+
+.media img {
+	cursor: pointer;
+	height: 135px;
+	width: 135px;
+}
+
+.employee-status {
+	position: absolute;
+	left: 135px;
+	top: 135px;
+}
+
+.status-neaktivs {
+	color: red;
+}
+
+.status-aktivs {
+	color: green;
+}

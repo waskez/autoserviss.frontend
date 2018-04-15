@@ -1,0 +1,27 @@
+<template>
+	<div class="animated fadeIn">
+		<div class="row">
+			<div class="col-md-12">
+				<company 
+					company.bind="company" 
+					current-page="details" 
+					add.delegate="searchEmployee($event)"
+					allow-edit.bind="allowEdit">
+				</company>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12" repeat.for="d of company.darbinieki">
+				<employee 
+					employee.bind="d" 
+					company.bind="company"
+					allow-edit.bind="allowEdit" 
+					avatar.delegate="avatar($event)" 
+					lock.delegate="lockUnlock($event)"
+					password.delegate="changePassword($event)"
+					delete.delegate="deleteEmployee($event)">
+				</employee>
+			</div>
+		</div>
+	</div>
+</template>

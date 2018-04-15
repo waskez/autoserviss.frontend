@@ -1,0 +1,47 @@
+<template>
+    <div class="row animated fadeIn">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-block">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Marka</span>
+                    </div>
+                    <select class="form-control" value.bind="selBrandId" change.delegate="onBrandSelected(selBrandId)">
+                      <option repeat.for="option of brands" model.bind="option.id">${option.nosaukums}</option>
+                    </select>
+                  </div>
+                </div>
+                <div if.bind="selBrandId > 0" class="card-block">
+                    <table class="table table-bordered table-hover service-table">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 60px;">#</th>
+                                <th>Modeļa nosaukums</th>
+                                <th>
+                                    <button type="button" title="Jauns modelis" class="btn btn-primary" click.delegate="edit(null)">Jauns</button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr repeat.for="m of models">
+                                <td class="text-center">${$index + 1}</td>
+                                <td>${m.nosaukums}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <button type="button" title="Labot modeli" class="btn btn-secondary-my" click.delegate="edit(m)">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                        <button type="button" title="Dzēst modeli" class="btn btn-secondary-my" click.delegate="delete(m)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

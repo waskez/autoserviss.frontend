@@ -1,0 +1,252 @@
+<template>
+	<style>
+		.form-control:disabled,
+		.form-control[readonly] {
+			background-color: #fff;
+		}
+	</style>
+	<div class="row justify-content-center animated fadeIn">
+		<div class="col-md-12 col-lg-10 col-xxl-6">
+			<div id="servisaLapa" class="card">
+				<div class="card-header">
+					<i class="fa fa-file mr-2"></i><strong>${title}</strong>
+				</div>
+				<div class="card-block">
+					<h5 class="card-title">${sheet.klients.nosaukums}</h5>
+					<h4 class="card-title mb-4">${sheet.transportlidzeklis.numurs}<span class="small text-muted ml-2">${sheet.transportlidzeklis.marka} ${sheet.transportlidzeklis.modelis}</span></h4>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="mr-2">Datums</label>
+								<aurelia-flatpickr value.bind="sheet.datums"></aurelia-flatpickr>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="mr-2">Apmaksāta</label>
+								<aurelia-flatpickr value.bind="sheet.apmaksata" placeholder="Apmaksas datums"></aurelia-flatpickr>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="mr-2">Pieteiktie defekti*</label>
+								<table class="table table-bordered service-table mt-2">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Pieteiktais defekts</th>
+											<th>
+												<button type="button" title="Jauns defekts" class="btn btn-primary" click.delegate="createDefect('Pieteiktais')">Jauns</button>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr repeat.for="def of sheet.defekti | defectsFilter: 'Pieteiktais'" element.ref="def.el">
+											<td>${$index + 1}</td>
+											<td if.bind="itemEdit !== def">${def.nosaukums}</td>
+											<td if.bind="itemEdit === def"><input type="text" class="w-100" focus.bind="def.hasFocus" value.bind="def.nosaukums" keypress.delegate="save($event)"></td>
+											<td>
+												<div class="btn-group btn-group-sm" role="group">
+													<button type="button" title="Labot defektu" class="btn btn-secondary-my" click.delegate="edit(def)"><i class="fa fa-pencil"></i></button>
+													<button type="button" title="Dzēst defektu" class="btn btn-secondary-my" click.delegate="deleteDefect(def)"><i class="fa fa-trash"></i></button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="mr-2">Atrastie defekti</label>
+								<table class="table table-bordered service-table mt-2">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Atrastais defekts</th>
+											<th>
+												<button type="button" title="Jauns defekts" class="btn btn-primary" click.delegate="createDefect('Atrastais')">Jauns</button>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr repeat.for="def of sheet.defekti | defectsFilter: 'Atrastais'">
+											<td>${$index + 1}</td>
+											<td if.bind="itemEdit !== def">${def.nosaukums}</td>
+											<td if.bind="itemEdit === def"><input type="text" class="w-100" focus.bind="def.hasFocus" value.bind="def.nosaukums" keypress.delegate="save($event)"></td>
+											<td>
+												<div class="btn-group btn-group-sm" role="group">
+													<button type="button" title="Labot defektu" class="btn btn-secondary-my" click.delegate="edit(def)"><i class="fa fa-pencil"></i></button>
+													<button type="button" title="Dzēst defektu" class="btn btn-secondary-my" click.delegate="deleteDefect(def)"><i class="fa fa-trash"></i></button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="mr-2">Paliekošie defekti</label>
+								<table class="table table-bordered service-table mt-2">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Paliekošais defekts</th>
+											<th>
+												<button type="button" title="Jauns defekts" class="btn btn-primary" click.delegate="createDefect('Paliekošais')">Jauns</button>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr repeat.for="def of sheet.defekti | defectsFilter: 'Paliekošais'">
+											<td>${$index + 1}</td>
+											<td if.bind="itemEdit !== def">${def.nosaukums}</td>
+											<td if.bind="itemEdit === def"><input type="text" class="w-100" focus.bind="def.hasFocus" value.bind="def.nosaukums" keypress.delegate="save($event)"></td>
+											<td>
+												<div class="btn-group btn-group-sm" role="group">
+													<button type="button" title="Labot defektu" class="btn btn-secondary-my" click.delegate="edit(def)"><i class="fa fa-pencil"></i></button>
+													<button type="button" title="Dzēst defektu" class="btn btn-secondary-my" click.delegate="deleteDefect(def)"><i class="fa fa-trash"></i></button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="mr-2">Paveiktais darbs</label>
+								<table class="table table-bordered service-table mt-2">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Paveiktais darbs</th>
+											<th>Daudzums</th>
+											<th>Mērvienība</th>
+											<th>Cena</th>
+											<th>
+												<button type="button" title="Jauns darbs" class="btn btn-primary" click.delegate="createMoney('paveiktieDarbi')">Jauns</button>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr repeat.for="job of sheet.paveiktieDarbi">
+											<td>${$index + 1}</td>
+											<td if.bind="itemEdit !== job">${job.nosaukums}</td>
+											<td if.bind="itemEdit !== job">${job.skaits}</td>
+											<td if.bind="itemEdit !== job">${job.mervieniba}</td>
+											<td if.bind="itemEdit !== job">${job.cena | numberToDecimal}</td>
+											<td if.bind="itemEdit === job"><input type="text" class="job-item w-100" focus.bind="job.hasFocus" value.bind="job.nosaukums" keypress.delegate="save($event)"></td>
+											<td if.bind="itemEdit === job"><input type="number" class="job-item w-100" value.bind="job.skaits" keypress.delegate="save($event)"></td>
+											<td if.bind="itemEdit === job"><input type="text" class="job-item w-100" value.bind="job.mervieniba" keypress.delegate="save($event)"></td>
+											<td if.bind="itemEdit === job"><input type="number" class="job-item w-100" min="0" step="0.01" value.bind="job.cena" keypress.delegate="save($event)"></td>
+											<td>
+												<div class="btn-group btn-group-sm" role="group">
+													<button type="button" title="Labot darbu" class="btn btn-secondary-my" click.delegate="edit(job)"><i class="fa fa-pencil"></i></button>
+													<button type="button" title="Dzēst darbu" class="btn btn-secondary-my" click.delegate="deleteJob(job)"><i class="fa fa-trash"></i></button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="mr-2">Rezerves daļas</label>
+								<table class="table table-bordered service-table mt-2">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Rezerves daļa</th>
+											<th>Daudzums</th>
+											<th>Mērvienība</th>
+											<th>Cena</th>
+											<th>
+												<button type="button" title="Jauna rezerves daļa" class="btn btn-primary" click.delegate="createMoney('rezervesDalas')">Jauna</button>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr repeat.for="part of sheet.rezervesDalas">
+											<td>${$index + 1}</td>
+											<td if.bind="itemEdit !== part">${part.nosaukums}</td>
+											<td if.bind="itemEdit !== part">${part.skaits | numberToDecimal}</td>
+											<td if.bind="itemEdit !== part">${part.mervieniba}</td>
+											<td if.bind="itemEdit !== part">${part.cena | numberToDecimal}</td>
+											<td if.bind="itemEdit === part"><input type="text" class="job-item w-100" focus.bind="part.hasFocus" value.bind="part.nosaukums" keypress.delegate="save($event)"></td>
+											<td if.bind="itemEdit === part"><input type="number" class="job-item w-100" value.bind="part.skaits" keypress.delegate="save($event)"></td>
+											<td if.bind="itemEdit === part"><input type="text" class="job-item w-100" value.bind="part.mervieniba" keypress.delegate="save($event)"></td>
+											<td if.bind="itemEdit === part"><input type="number" class="job-item w-100" min="0" step="0.01" value.bind="part.cena" keypress.delegate="save($event)"></td>
+											<td>
+												<div class="btn-group btn-group-sm" role="group">
+													<button type="button" title="Labot rezerves daļu" class="btn btn-secondary-my" click.delegate="edit(part)"><i class="fa fa-pencil"></i></button>
+													<button type="button" title="Dzēst rezerves daļu" class="btn btn-secondary-my" click.delegate="deletePart(part)"><i class="fa fa-trash"></i></button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="serviceUznemums">Uzņēmums*</label>
+								<select id="serviceUznemums" class="form-control" value.bind="sheet.uznemumaId" change.delegate="uznemumsChanged($event)">
+									<option repeat.for="c of companies" model.bind="c.id">${c.nosaukums}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="serviceMehaniki">Mehāņiķi*</label>
+								<multiselect id="serviceMehaniki" items.bind="mechanics" selected-items.bind="sheet.mehaniki"></multiselect>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="servicePiezimes">Piezīmes</label>
+								<textarea id="servicePiezimes" placeholder="Piezīmes" class="form-control" rows="2" value.bind="sheet.piezimes"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group pull-right mr-2">
+								<label class="col-form-label mr-2">Summa kopā:</label>
+								<span class="form-control-static"><strong>${sheet.kopejaSumma | numberToDecimal}</strong></span>
+							</div>
+						</div>
+					</div>
+					<div class="row mt-4">
+						<div class="col-md-12">
+							<form-alert message.bind="alert.message" alert-type.bind="alert.type"></form-alert>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					<button type="button" class="btn btn-primary mr-2" disabled.bind="isSaving" click.trigger="validate()"><i class="fa fa-dot-circle-o mr-2"></i>Saglabāt</span></button>
+					<button type="button" class="btn btn-secondary-my" click.delegate="router.navigateBack()"><i class="fa fa-ban mr-2"></i>Atgriezties</span></button>
+					<button if.bind="sheet.id > 0" type="button" class="btn btn-danger pull-right" click.delegate="print()"><i class="fa fa-print mr-2"></i>Printēt</span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

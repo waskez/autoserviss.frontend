@@ -1,0 +1,25 @@
+<template>
+	<header class="app-header navbar">
+		<button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button" click.delegate="openSidebar()">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+		<a class="navbar-brand" style="background-size: 100px auto;" href="#"></a>
+		<ul class="nav navbar-nav d-md-down-none">
+			<li class="nav-item">
+				<a class="nav-link navbar-toggler sidebar-toggler" href="#" click.delegate="toggleSidebar()">
+          <span class="navbar-toggler-icon"></span>
+        </a>
+			</li>
+		</ul>
+		<ul class="nav navbar-nav ml-auto" style="margin-right: 15px;">
+			<li class="nav-item dropdown" aubs-dropdown>
+				<a class="nav-link dropdown-toggle" href="javascript:void(0)" aubs-dropdown-toggle>${user.name}</a>
+				<div class="dropdown-menu dropdown-menu-right" style="right: -4px;">
+					<a if.bind="user.admin" class="dropdown-item" href="#/settings"><i class="fa fa-cog" ></i> Iestatījumi</a>
+					<a if.bind="user.admin" class="dropdown-item" href="#/logs"><i class="fa fa-warning" ></i> Kļūdu žurnāls</a>
+					<a class="dropdown-item" href="#" click.delegate="logout()"><i class="fa fa-lock" ></i> Izrakstīties</a>
+				</div>
+			</li>
+		</ul>
+	</header>
+</template>

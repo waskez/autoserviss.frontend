@@ -1,0 +1,24 @@
+<template>
+	<style>
+		.flatpickr-input {
+			margin-left: 15px;
+			width: 98px !important;
+			font-weight: bold;
+		}
+	</style>
+	<div class="animated fadeIn">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header form-inline">
+						<i class="fa fa-file mr-2"></i><strong>Kļūdu žurnāls</strong>
+						<aurelia-flatpickr config.bind="config" change.delegate="dateChanged($event)" value.bind="logDate"></aurelia-flatpickr>
+					</div>
+					<div class="card-block">
+						<pre id="contents">Izvēlies datumu</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

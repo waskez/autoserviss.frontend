@@ -1,0 +1,53 @@
+<template>
+    <style>
+        .pagination {
+            flex-wrap: wrap;
+        }
+
+        .pagination a {
+            margin: 4px;
+        }
+    </style>
+    <div class="row animated fadeIn">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-block" style="padding-bottom: 0;">
+                    <ul class="pagination d-flex justify-content-center">
+                        <li class="page-item ${l.active ? 'active' : ''}" repeat.for="l of letters">
+                            <a href="#" class="page-link" click.delegate="load(l)">${l.letter}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-block">
+                    <table class="table table-bordered table-hover service-table">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 60px;">#</th>
+                                <th>Markas nosaukums</th>
+                                <th>
+                                    <button type="button" title="Jauna marka" class="btn btn-primary" click.delegate="edit(null)">Jauna</button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr repeat.for="b of brands | filter:selectedLetter:filterFunc">
+                                <td class="text-center">${$index + 1}</td>
+                                <td>${b.nosaukums}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <button type="button" title="Labot marku" class="btn btn-secondary-my" click.delegate="edit(b)">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                        <button type="button" title="Dzēst marku" class="btn btn-secondary-my" click.delegate="delete(b)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

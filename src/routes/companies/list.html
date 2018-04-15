@@ -1,0 +1,30 @@
+<template>
+	<div class="animated fadeIn">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-block">
+						<div class="d-flex justify-content-between">
+							<a if.bind="allowEdit" href="#/companies/0/edit" class="btn btn-primary mr-2"><i class="fa fa-user-plus mr-2"></i>Jauns uzņēmums</a>
+							<div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fa fa-filter"></i>
+                    </span>
+                  </div>
+								  <input type="text" class="form-control" placeholder="Nosaukums" value.bind="filterTerm">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12" repeat.for="comp of companies | filter:filterTerm:filterFunc">
+				<company 
+					company.bind="comp" 
+					allow-edit.bind="allowEdit" 
+					delete.delegate="delete($event)">
+				</company>
+			</div>
+		</div>
+	</div>
+</template>

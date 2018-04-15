@@ -1,0 +1,57 @@
+<template>
+  <div class="app flex-row" style="margin-top: 40px;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-6 col-xxl-4">
+          <div class="card-group mb-0">
+            <div class="card p-4">
+              <form class="card-block" submit.delegate="login()">
+                <h1>Pierakstīšanās</h1>
+                <p class="text-muted">Pierakstieties savā kontā</p>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="icon-user"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" id="loginUsername" placeholder="Lietotājvārds" value.bind="username">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="icon-lock"></i>
+                    </span>
+                  </div>
+                  <input type="password" class="form-control" id="loginPassword" placeholder="Parole" value.bind="password">
+                </div>
+                <form-alert message.bind="alert.message" alert-type.bind="alert.type"></form-alert>
+                <div aubs-collapse="collapsed.bind: emailCollapsed">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="icon-envelope"></i>
+                    </span>
+                    <input type="text" class="form-control" id="loginEmail" placeholder="E-pasta adrese" value.bind="email">
+                    <span class="input-group-btn">
+                      <button class="btn btn-secondary-my" type="button" click.delegate="send()" aubs-btn-loading="loading.bind: isSending; text: <i class='fa fa-refresh fa-spin'></i> Nosūta">
+                        Nosūtīt
+                      </button>
+                    </span>
+                  </div>
+                  <small id="emailHelpInline" class="text-muted">Uz norādīto e-pasta adresi tiks nosūtīta parole</small>
+                </div>
+                <div class="row" style="padding-top: 8px;">
+                  <div class="col-6">
+                    <button type="submit" class="btn btn-primary px-4" aubs-btn-loading="loading.bind: signUp; text: <i class='fa fa-refresh fa-spin mr-2'></i> Pierakstās">Pierakstīties</button>
+                  </div>
+                  <div class="col-6 text-right">
+                    <button type="button" class="btn btn-link px-0" click.delegate="forgotten()">Aizmirsi paroli?</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

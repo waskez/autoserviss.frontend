@@ -1,0 +1,32 @@
+<template>
+	<div class="card">
+		<div class="card-block">
+			<div class="media">
+				<a href="#/customers/${customer.id}">
+					<img class="d-flex mr-3" src="img/avatars/default_avatar.jpg" alt="Avatar">
+				</a>
+				<div class="media-body">
+					<h5>${customer.nosaukums}</h5>
+					<ul if.bind="allowEdit && currentPage !== 'details'" class="action-links">
+						<li><a href="#/customers/${customer.id}" title="Klienta transportlīdzekļi"><i class="fa fa-car"></i></a></li>
+						<li><a href="#/customers/${customer.id}/${customer.veids}" title="Labot klienta datus"><i class="fa fa-pencil"></i></a></li>
+						<li><a href="#" title="Dzēst klientu" click.delegate="delete()"><i class="fa fa-remove"></i></a></li>
+					</ul>
+					<div>
+						<div repeat.for="addr of customer.adreses"><i class="fa fa-location-arrow mr-1"></i>${addr.nosaukums}</div>
+						<div><i class="fa fa-envelope-o mr-1"></i> ${customer.epasts | customerEmail}</div>
+						<div><i class="fa fa-phone mr-1"></i> ${customer.talrunis | customerPhone}</div>
+						<div if.bind="customer.veids === 2">
+							<i class="fa fa-user mr-1"></i> ${customer.kontaktpersona | customerPerson}
+						</div>
+						<div repeat.for="bank of customer.bankas"><i class="fa fa-bank mr-1"></i>${bank.nosaukums} ${bank.konts}</div>
+					</div>
+					<div if.bind="allowEdit && currentPage === 'details'">
+						<a href="#/customers/${customer.id}/${customer.veids}" class="btn btn-primary mt-2 mr-2">Labot datus</a>
+						<a href="#/customers/${customer.id}/vehicles/0" class="btn btn-primary mt-2">Jauns transportlīdzeklis</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

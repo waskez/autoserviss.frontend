@@ -1,0 +1,12 @@
+<template>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item ${$last ? 'active' : ''}" repeat.for="item of items">
+			<template if.bind="$last">
+				${item.title}
+			</template>
+			<template if.bind="!$last">
+				<a href="#" click.delegate="navigate(item.route)">${item.title}</a>
+			</template>
+		</li>
+	</ol>
+</template>

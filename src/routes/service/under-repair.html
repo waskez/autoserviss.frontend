@@ -1,0 +1,14 @@
+<template>
+	<div class="animated fadeIn">
+		<div class="row">
+			<div class="col-md-12" repeat.for="v of vehicles">
+				<vehicle 
+					vehicle.bind="v" 
+					current-page="repair" 
+					allow-edit.bind="allowEdit" 
+					delete.delegate="deleteVehicle($event)">
+				</vehicle>
+			</div>
+		</div>
+	</div>
+</template>

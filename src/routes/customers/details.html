@@ -1,0 +1,23 @@
+<template>
+	<div class="animated fadeIn">
+		<div class="row">
+			<div class="col-md-12">
+				<customer 
+					customer.bind="customer" 
+					current-page="details" 
+					allow-edit.bind="allowEdit">
+				</customer>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12" repeat.for="v of customer.transportlidzekli">
+				<vehicle 
+					vehicle.bind="v" 
+					current-page="customer" 
+					allow-edit.bind="allowEdit" 
+					delete.delegate="deleteVehicle($event)">
+				</vehicle>
+			</div>
+		</div>
+	</div>
+</template>

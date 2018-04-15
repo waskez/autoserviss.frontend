@@ -1,0 +1,21 @@
+<template>
+    <div class="sidebar">
+        <nav class="sidebar-nav">
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link" href="#"><i class="icon-home"></i> Sākums </a></li>
+                <li class="divider"></li>
+                <li class="nav-title"> Meklēt </li>
+                <li class="nav-item"><a class="nav-link" href="#" click.delegate="search('customer')"><i class="icon-magnifier"></i> Klientu </a></li>
+                <li class="nav-item"><a class="nav-link" href="#" click.delegate="search('vehicle')"><i class="icon-magnifier"></i> Transportlīdzekli </a></li>
+                <li class="divider"></li>
+                <li class="nav-title"> Klienti </li>
+				        <li class="nav-item"><a class="nav-link" href="#/customers/list/2"><i class="icon-organization"></i> Juridiskās personas </a></li>
+                <li class="nav-item"><a class="nav-link" href="#/customers/list/1"><i class="icon-people"></i> Fiziskās personas </a></li>
+                <li class="divider"></li>
+				        <li class="nav-title"> Serviss </li>
+				        <li class="nav-item"><a class="nav-link" href="#/service/under-repair"><i class="icon-wrench"></i> Pašlaik remontā </a></li>
+				        <li class="nav-item"><a class="nav-link" href="#/companies"><i class="icon-people"></i> Uzņēmumi </a></li>
+            </ul>
+        </nav>
+    </div>
+</template>

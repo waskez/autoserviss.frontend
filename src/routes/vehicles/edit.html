@@ -1,0 +1,128 @@
+<template>
+	<div class="row justify-content-center">
+		<div class="col-md-12 col-lg-10 col-xxl-6">
+			<div class="card animated fadeIn">
+				<div class="card-header">
+					<strong innerHtml.bind="title"></strong>
+				</div>
+				<div class="card-block">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="vehicleNumurs">Reģistrācijas numurs*</label>
+								<input type="text" id="vehicleNumurs" placeholder="Reģistrācijas numurs" class="form-control" value.bind="vehicle.numurs | upperCase">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="vehicleMarka">Marka*</label>
+								<select id="vehicleMarka" class="form-control" value.bind="vehicle.marka" change.delegate="markaChanged($event)">
+									<option class="text-muted" value="empty">Izvēlies marku</option>
+									<option repeat.for="m of markas" value.bind="m.nosaukums">${m.nosaukums}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="vehicleModelis">Modelis*</label>
+								<select id="vehicleModelis" class="form-control" value.bind="vehicle.modelis">
+									<option class="text-muted" value="empty">Izvēlies modeli</option>
+									<option repeat.for="m of modeli" value.bind="m.nosaukums">${m.nosaukums}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="vehicleTips">Tips</label>
+								<input type="text" id="vehicleTips" placeholder="Tips" class="form-control" value.bind="vehicle.tips">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="vehicleVariants">Variants</label>
+								<input type="text" id="vehicleVariants" placeholder="Variants" class="form-control" value.bind="vehicle.variants">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="vehicleVersija">Versija</label>
+								<input type="text" id="vehicleVersija" placeholder="Versija" class="form-control" value.bind="vehicle.versija">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="vehicleVin">VIN numurs</label>
+								<input type="text" id="vehicleVin" placeholder="VIN numurs" class="form-control" value.bind="vehicle.vin">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="vehicleKrasa">Krāsa</label>
+								<input type="text" id="vehicleKrasa" placeholder="Krāsa" class="form-control" value.bind="vehicle.krasa">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="vehicleGads">Izlaiduma gads</label>
+								<input type="number" id="vehicleGads" placeholder="Izlaiduma gads" class="form-control" value.bind="vehicle.gads">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="vehicleDegviela">Degviela</label>
+								<input type="text" id="vehicleDegviela" placeholder="Degviela" class="form-control" value.bind="vehicle.degviela">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="vehicleTilpums">Motora tilpums</label>
+								<input type="text" id="vehicleTilpums" placeholder="Motora tilpums" class="form-control" value.bind="vehicle.tilpums">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="vehicleJauda">Motora jauda</label>
+								<input type="text" id="vehicleJauda" placeholder="Motora jauda" class="form-control" value.bind="vehicle.jauda">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label for="vehicleMasa">Pilna masa</label>
+								<input type="text" id="vehicleMasa" placeholder="Pilna masa" class="form-control" value.bind="vehicle.pilnaMasa">
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label for="vehiclePasmasa">Pašmasa</label>
+								<input type="text" id="vehiclePasmasa" placeholder="Pašmasa" class="form-control" value.bind="vehicle.pasmasa">
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="form-group">
+								<label for="vehiclePiezimes">Piezīmes</label>
+								<input type="text" id="vehiclePiezimes" placeholder="Piezīmes" class="form-control" value.bind="vehicle.piezimes">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<form-alert message.bind="alert.message" alert-type.bind="alert.type"></form-alert>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					<button type="button" class="btn btn-primary mr-2" disabled.bind="isSaving" click.trigger="validate()"><i class="fa fa-dot-circle-o mr-2"></i>Saglabāt</span></button>
+					<button type="button" class="btn btn-secondary-my" click.delegate="router.navigateBack()"><i class="fa fa-ban mr-2"></i>Atgriezties</span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

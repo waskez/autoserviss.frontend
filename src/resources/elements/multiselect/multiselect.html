@@ -1,0 +1,22 @@
+<template>
+	<div tabindex="0" class="multiselect" blur.trigger="closeDropdown($event)">
+		<div class="selected-items" click.trigger="toggleDropdown($event)">
+			<span if.bind="selectedItems.length == 0">${placeholder}</span>
+			<div class="items-list" if.bind="selectedItems.length > 0">
+				<div class="item-token" repeat.for="item of selectedItems">
+					<span class="item-label">${item.nosaukums}</span>
+				</div>
+			</div> 
+		</div>
+		<div class="dropdown-list" show.bind="isOpen">
+			<div class="list-area">
+				<ul css="max-height: ${maxHeight}px;">
+					<li repeat.for="item of items" click.delegate="onItemClick(item)" class="pure-checkbox">
+						<input type="checkbox" checked.bind="item.selected"/>
+						<label>${item.nosaukums}</label>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</template>

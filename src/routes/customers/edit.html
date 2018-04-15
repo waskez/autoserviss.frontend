@@ -1,0 +1,156 @@
+<template>
+	<div class="row justify-content-center">
+		<div class="col-md-12 col-lg-10 col-xxl-6">
+			<div class="card animated fadeIn">
+				<div class="card-header">
+					<strong innerhtml.bind="title"></strong>
+				</div>
+				<div class="card-block">
+					<div if.bind="customer.veids === 1" class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="customerName">Pilns vārds*</label>
+								<input type="text" id="customerName" placeholder="Pilns vārds" class="form-control" value.bind="customer.nosaukums">
+							</div>
+						</div>
+					</div>
+					<div if.bind="customer.veids === 2" class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="customerName">Nosaukums*</label>
+								<input type="text" id="customerName" placeholder="Nosaukums" class="form-control" value.bind="customer.nosaukums">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="customerKontaktpersona">Kontaktpersona</label>
+								<input type="text" id="customerKontaktpersona" placeholder="Kontaktpersona" class="form-control" value.bind="customer.kontaktpersona">
+							</div>
+						</div>
+					</div>
+					<div if.bind="customer.veids === 2" class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="customerRn">Reģistrācijas numurs*</label>
+								<input type="text" id="customerRn" placeholder="Reģistrācijas numurs" class="form-control" value.bind="customer.regNumurs">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="customerPvn">PVN maksātāja numurs*</label>
+								<input type="text" id="customerPvn" placeholder="PVN maksātāja numurs" class="form-control" value.bind="customer.pvnNumurs | upperCase">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="customerEmail">E-pasta adrese</label>
+								<input type="text" id="customerEmail" placeholder="E-pasta adrese" class="form-control" value.bind="customer.epasts">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="customerPhone">Tālruņa numurs</label>
+								<input type="text" id="customerPhone" placeholder="Tālruņa numurs" class="form-control" value.bind="customer.talrunis">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label if.bind="customer.veids === 1" class="mr-2">Adreses</label>
+								<label if.bind="customer.veids === 2" class="mr-2">Adreses*</label>
+								<table class="table table-bordered service-table mt-2">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Veids</th>
+											<th>Adrese</th>
+											<th>
+												<button type="button" title="Jauna adrese" class="btn btn-primary" click.delegate="create('adreses')">Jauna</button>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr repeat.for="addr of customer.adreses">
+											<td>${$index + 1}</td>
+											<td if.bind="itemEdit !== addr">${addr.veids}</td>
+											<td if.bind="itemEdit !== addr">${addr.nosaukums}</td>
+											<td if.bind="itemEdit === addr">
+												<select class="job-item w-100" value.bind="addr.veids">
+													<option repeat.for="at of addressTypes" value.bind="at">${at}</option>
+												</select>
+											</td>
+											<td if.bind="itemEdit === addr"><input type="text" focus.bind="addr.hasFocus" class="job-item w-100" value.bind="addr.nosaukums" keypress.delegate="save($event)"></td>
+											<td>
+												<div class="btn-group btn-group-sm" role="group">
+													<button type="button" title="Labot adresi" class="btn btn-secondary-my" click.delegate="edit(addr)"><i class="fa fa-pencil"></i></button>
+													<button type="button" title="Dzēst adresi" class="btn btn-secondary-my" click.delegate="delete(addr, 'adreses')"><i class="fa fa-trash"></i></button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div if.bind="customer.veids === 2" class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="mr-2">Bankas*</label>
+								<table class="table table-bordered service-table mt-2">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Nosaukums</th>
+											<th>Kods</th>
+											<th>Konts</th>
+											<th>
+												<button type="button" title="Jauna banka" class="btn btn-primary" click.delegate="create('bankas')">Jauna</button>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr repeat.for="bank of customer.bankas">
+											<td>${$index + 1}</td>
+											<td if.bind="itemEdit !== bank">${bank.nosaukums}</td>
+											<td if.bind="itemEdit !== bank">${bank.kods}</td>
+											<td if.bind="itemEdit !== bank">${bank.konts}</td>
+											<td if.bind="itemEdit === bank"><input type="text" focus.bind="bank.hasFocus" class="job-item w-100" value.bind="bank.nosaukums" keypress.delegate="save($event)"></td>
+											<td if.bind="itemEdit === bank"><input type="text" class="job-item w-100" value.bind="bank.kods" keypress.delegate="save($event)"></td>
+											<td if.bind="itemEdit === bank"><input type="text" class="job-item w-100" value.bind="bank.konts" keypress.delegate="save($event)"></td>
+											<td>
+												<div class="btn-group btn-group-sm" role="group">
+													<button type="button" title="Labot banku" class="btn btn-secondary-my" click.delegate="edit(bank)"><i class="fa fa-pencil"></i></button>
+													<button type="button" title="Dzēst banku" class="btn btn-secondary-my" click.delegate="delete(bank, 'bankas')"><i class="fa fa-trash"></i></button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="customerNotes">Piezīmes</label>
+								<textarea class="form-control" id="customerNotes" rows="2" value.bind="customer.piezimes"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<form-alert message.bind="alert.message" alert-type.bind="alert.type"></form-alert>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					<button type="button" class="btn btn-primary mr-2" disabled.bind="isSaving" click.trigger="validate()"><i class="fa fa-dot-circle-o mr-2"></i>Saglabāt</span></button>
+					<button type="button" class="btn btn-secondary-my" click.delegate="router.navigateBack()"><i class="fa fa-ban mr-2"></i>Atgriezties</span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

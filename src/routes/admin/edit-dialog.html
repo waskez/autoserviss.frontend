@@ -1,0 +1,26 @@
+<template>
+    <div role="dialog" class="modal-primary modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">${model.title}</h5>
+                </div>
+                <div class="modal-body">
+					<div class="form-group">
+						<label for="editInput">${model.label}</label>
+						<input type="text" id="editInput" placeholder.bind="model.label" class="form-control" attach-focus="true" value.bind="model.value | upperCase">
+					</div>
+					<form-alert message.bind="alert.message" alert-type.bind="alert.type"></form-alert>
+				</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" attach-focus="true" click.delegate="controller.cancel()">
+                        <i class="fa fa-ban mr-2"></i>Atcelt
+                    </button>
+                    <button type="button" class="btn btn-primary" click.trigger="save()" disabled.bind="model.value.length == 0">
+                        <i class="fa fa-dot-circle-o mr-2"></i>Saglabāt
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

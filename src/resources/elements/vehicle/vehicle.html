@@ -1,0 +1,29 @@
+<template>
+	<div class="card">
+		<div class="card-block">
+			<div class="media">
+				<a href="#/vehicles/${vehicle.id}">
+					<img class="d-flex mr-3" src="img/default_car.png" alt="AutoLogo">
+				</a>
+				<div class="media-body">
+					<h4 class="card-title mb-2">${vehicle.numurs}</h4>
+					<h5 class="text-muted mb-3">${vehicle.marka} ${vehicle.modelis}</h5>
+					<ul if.bind="allowEdit && currentPage === 'customer'" class="action-links">
+						<li><a href="#/service/vehicle/${vehicle.id}/sheet" title="Servisa lapa"><i class="fa fa-wrench"></i></a></li>
+						<li><a href="#/vehicles/${vehicle.id}" title="Remontu vēsture"><i class="fa fa-info-circle"></i></a></li>
+						<li><a href="#/customers/${vehicle.klientaId}/vehicles/${vehicle.id}" title="Labot transportlīdzekļa datus"><i class="fa fa-pencil"></i></a></li>
+						<li><a href="#" title="Dzēst transportlīdzekli" click.delegate="delete()"><i class="fa fa-remove"></i></a></li>
+					</ul>
+					<div if.bind="allowEdit && currentPage === 'repair'">
+						<a href="#/service/vehicle/${vehicle.id}/sheet" class="btn btn-primary mt-2 mr-2">Servisa lapa</a>
+						<a href="#/customers/${vehicle.klientaId}" class="btn btn-primary mt-2">Klienta dati</a>
+					</div>
+					<div if.bind="allowEdit && currentPage === 'details'">
+						<a href="#/customers/${vehicle.klientaId}/vehicles/${vehicle.id}" class="btn btn-primary mt-2 mr-2">Labot datus</a>
+						<a href="#/customers/${vehicle.klientaId}" class="btn btn-primary mt-2">Klienta dati</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

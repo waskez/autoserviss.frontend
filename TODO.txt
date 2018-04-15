@@ -1,0 +1,15 @@
+﻿1. Ielādējam projektu no https://github.com/mrholek/CoreUI-Free-Bootstrap-Admin-Template
+2. No projekta Static_Starter_GULP uz root direktoriju kopējam mapes css, fonts, imp, scss
+3. index.html head sekcijā ievietojam:
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  	<link rel="shortcut icon" href="img/favicon.ico">
+  	<title>AutoServiss</title>
+  	<link href="css/font-awesome.min.css" rel="stylesheet">
+  	<link href="css/simple-line-icons.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+4. scss/bootstrap/_variables.scss:
+	$grid-breakpoints - pieliekam xxl: 1680px
+	$container-max-widths - pieliekam xxl: 1620px;

@@ -1,0 +1,43 @@
+<template>
+    <style>
+        .history-body {
+            display: inline-block;
+            margin-right: 35px;
+            vertical-align: top;
+        }
+        .history-body ol {
+            padding-left: 15px;
+        }
+    </style>
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <vehicle vehicle.bind="vehicle" current-page="details" allow-edit.bind="allowEdit"></vehicle>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" repeat.for="h of history">
+                    <h4 class="card-header">${h.no | dateFormat} - ${h.lidz | dateFormat}</h4>
+                    <div class="card-body">
+                        <div class="history-body">
+                            <h4 class="card-title">Paveiktie darbi</h4>
+                            <ol>
+                                <li repeat.for="j of h.paveiktieDarbi">${j.nosaukums}</li>
+                            </ol>
+                        </div>
+                        <div class="history-body">
+                            <h4 class="card-title">Rezerves daļas</h4>
+                            <ol>
+                                <li repeat.for="p of h.rezervesDalas">${p.nosaukums}</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding-top: 0;">
+                        <a href="#/service/sheet/${h.id}" class="btn btn-primary">Servisa lapa</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

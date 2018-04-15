@@ -1,0 +1,141 @@
+<template>
+	<div class="row justify-content-center">
+		<div class="col-md-12 col-lg-10 col-xxl-6">
+			<div class="card animated fadeIn">
+				<div class="card-header">
+					<strong innerhtml.bind="title"></strong>
+				</div>
+				<div class="card-block">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="companyName">Nosaukums*</label>
+								<input type="text" id="companyName" placeholder="Nosaukums" class="form-control" value.bind="company.nosaukums">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="companyRn">Reģistrācijas numurs*</label>
+								<input type="text" id="companyRn" placeholder="Reģistrācijas numurs" class="form-control" value.bind="company.regNumurs">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="companyPvn">PVN maksātāja numurs*</label>
+								<input type="text" id="companyPvn" placeholder="PVN maksātāja numurs" class="form-control" value.bind="company.pvnNumurs">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="companyEmail">E-pasta adrese*</label>
+								<input type="text" id="companyEmail" placeholder="E-pasta adrese" class="form-control" value.bind="company.epasts">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="companyPhone">Tālruņa numurs*</label>
+								<input type="text" id="companyPhone" placeholder="Tālruņa numurs" class="form-control" value.bind="company.talrunis">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="mr-2">Adreses*</label>
+								<table class="table table-bordered service-table mt-2">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Veids</th>
+											<th>Adrese</th>
+											<th>
+												<button type="button" title="Jauna adrese" class="btn btn-primary" click.delegate="create('adreses')">Jauna</button>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr repeat.for="addr of company.adreses">
+											<td>${$index + 1}</td>
+											<td if.bind="itemEdit !== addr">${addr.veids}</td>
+											<td if.bind="itemEdit !== addr">${addr.nosaukums}</td>
+											<td if.bind="itemEdit === addr">
+												<select class="job-item w-100" value.bind="addr.veids">
+													<option repeat.for="at of addressTypes" value.bind="at">${at}</option>
+												</select>
+											</td>
+											<td if.bind="itemEdit === addr"><input type="text" focus.bind="addr.hasFocus" class="job-item w-100" value.bind="addr.nosaukums" keypress.delegate="save($event)"></td>
+											<td>
+												<div class="btn-group btn-group-sm" role="group">
+													<button type="button" title="Labot adresi" class="btn btn-secondary-my" click.delegate="edit(addr)"><i class="fa fa-pencil"></i></button>
+													<button type="button" title="Dzēst adresi" class="btn btn-secondary-my" click.delegate="delete(addr, 'adreses')"><i class="fa fa-trash"></i></button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="mr-2">Bankas*</label>
+								<table class="table table-bordered service-table mt-2">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Nosaukums</th>
+											<th>Kods</th>
+											<th>Konts</th>
+											<th>
+												<button type="button" title="Jauna banka" class="btn btn-primary" click.delegate="create('bankas')">Jauna</button>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr repeat.for="bank of company.bankas">
+											<td>${$index + 1}</td>
+											<td if.bind="itemEdit !== bank">${bank.nosaukums}</td>
+											<td if.bind="itemEdit !== bank">${bank.kods}</td>
+											<td if.bind="itemEdit !== bank">${bank.konts}</td>
+											<td if.bind="itemEdit === bank"><input type="text" focus.bind="bank.hasFocus" class="job-item w-100" value.bind="bank.nosaukums | upperCase" keypress.delegate="save($event)"></td>
+											<td if.bind="itemEdit === bank"><input type="text" class="job-item w-100" value.bind="bank.kods | upperCase" keypress.delegate="save($event)"></td>
+											<td if.bind="itemEdit === bank"><input type="text" class="job-item w-100" value.bind="bank.konts | upperCase" keypress.delegate="save($event)"></td>
+											<td>
+												<div class="btn-group btn-group-sm" role="group">
+													<button type="button" title="Labot banku" class="btn btn-secondary-my" click.delegate="edit(bank)"><i class="fa fa-pencil"></i></button>
+													<button type="button" title="Dzēst banku" class="btn btn-secondary-my" click.delegate="delete(bank, 'bankas')"><i class="fa fa-trash"></i></button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="companyNotes">Piezīmes</label>
+								<textarea class="form-control" id="companyNotes" rows="2" value.bind="company.piezimes"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<form-alert message.bind="alert.message" alert-type.bind="alert.type"></form-alert>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					<button type="button" class="btn btn-primary mr-2" disabled.bind="isSaving" click.trigger="validate()"><i class="fa fa-dot-circle-o mr-2"></i>Saglabāt</span></button>
+					<button type="button" class="btn btn-secondary-my" click.delegate="router.navigateBack()"><i class="fa fa-ban mr-2"></i>Atgriezties</span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

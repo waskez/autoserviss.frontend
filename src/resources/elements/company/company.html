@@ -1,0 +1,38 @@
+<template>
+	<div class="card">
+		<div class="card-block">
+			<div class="media">
+				<a href="#/companies/${company.id}">
+					<img class="d-flex mr-3" src="img/company_logo.png" alt="Logo">
+				</a>
+				<div class="media-body">
+					<h5>${company.nosaukums}</h5>
+					<ul if.bind="allowEdit && currentPage !== 'details'" class="action-links">
+						<li><a href="#/companies/${company.id}" title="Darbinieku saraksts"><i class="fa fa-users"></i></a></li>
+						<li><a href="#/companies/${company.id}/edit" title="Labot uzņēmuma datus"><i class="fa fa-pencil"></i></a></li>
+						<li><a href="#" title="Dzēst uzņēmumu" click.delegate="dispatch('delete')"><i class="fa fa-remove"></i></a></li>
+					</ul>
+					<div>
+						<div repeat.for="addr of company.adreses"><i class="fa fa-location-arrow mr-1"></i>${addr.nosaukums}</div>
+						<div><i class="fa fa-envelope-o mr-1"></i>${company.epasts}</div>
+						<div><i class="fa fa-phone mr-1"></i>${company.talrunis}</div>
+						<!-- <div repeat.for="bank of company.bankas"><i class="fa fa-bank mr-1"></i>${bank.nosaukums} ${bank.konts}</div> -->
+					</div>
+					<div if.bind="allowEdit && currentPage === 'details'" class="form-inline">
+						<a href="#/companies/${company.id}/edit" class="btn btn-primary mt-2 mr-2">Labot datus</a>
+						<!-- <a href="#/companies/${company.id}/employees/0" class="btn btn-primary mt-2">Jauns darbinieks</a> -->
+						<div class="dropdown" aubs-dropdown>
+							<a class="btn btn-primary dropdown-toggle mt-2" href="javascript:void(0)" aubs-dropdown-toggle>
+							  Jauns darbinieks
+							</a>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="#/companies/${company.id}/employees/0">Jauns darbinieks</a>
+								<a class="dropdown-item" href="#" click.delegate="dispatch('add')">No cita uzņēmuma</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

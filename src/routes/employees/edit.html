@@ -1,0 +1,96 @@
+<template>
+    <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-10 col-xxl-6">
+            <div class="card animated fadeIn">
+                <div class="card-header">
+                    <strong innerhtml.bind="title"></strong>
+                </div>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="employeeName">Pilns vārds*</label>
+                                <input type="text" id="employeeName" placeholder="Pilns vārds" class="form-control" value.bind="employee.pilnsVards">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="employeePost">Amats*</label>
+                                <input type="text" id="employeePost" placeholder="Amats" class="form-control" value.bind="employee.amats">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="employeeEmail">E-pasta adrese</label>
+                                <input type="text" id="employeeEmail" placeholder="E-pasta adrese" class="form-control" value.bind="employee.epasts">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="employeePhone">Tālruņa numurs</label>
+                                <input type="text" id="employeePhone" placeholder="Tālruņa numurs" class="form-control" value.bind="employee.talrunis">
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="hr-text" data-content="LIETOTĀJA KONTS">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="employeeUsername">Lietotājvārds</label>
+                                <input type="text" id="employeeUsername" placeholder="Lietotājvārds" class="form-control" value.bind="employee.lietotajvards">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div if.bind="!account" class="form-group">
+                                <label for="employeePassword">Parole</label>
+                                <input type="password" id="employeePassword" placeholder="Parole" class="form-control" autocomplete="new-password" value.bind="employee.parole">
+                                <small class="text-muted">Vismaz 6 simbolus gara, vismaz 1 cipars, vismaz 1 speciālais simbols</small>
+                            </div>
+                            <div if.bind="account" class="form-group">
+                                <label for="employeePwd">Jauna parole</label>
+                                <button type="button" class="btn btn-secondary-my form-control" id="employeePwd" click.delegate="change()">Mainīt paroli</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="form-inline" style="margin-top: 15px;">
+                                    <div class="form-group mr-3">
+                                        <div class="checkbox checkbox-success" style="padding-left: 12px;">
+                                            <input type="checkbox" id="employeeMehanikis" checked.bind="employee.mehanikis" />
+                                            <label for="employeeMehanikis">Mehāniķis</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mr-3">
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" id="employeeAktivs" checked.bind="employee.aktivs" />
+                                            <label for="employeeAktivs">Aktīvs</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" id="employeeAdmin" checked.bind="employee.administrators" />
+                                            <label for="employeeAdmin">Drīkst labot datus</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form-alert message.bind="alert.message" alert-type.bind="alert.type"></form-alert>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary mr-2" disabled.bind="isSaving" click.trigger="validate()">
+                        <i class="fa fa-dot-circle-o mr-2"></i>Saglabāt</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary-my" click.delegate="router.navigateBack()">
+                        <i class="fa fa-ban mr-2"></i>Atgriezties</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

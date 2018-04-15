@@ -1,0 +1,34 @@
+<template>
+    <div class="card">
+        <div class="card-block">
+            <div class="media">
+                <label for="file-input" class="mb-0">
+                    <img class="d-flex mr-3" src.bind="employee.avatar ? employee.avatar : 'img/avatars/default_avatar.jpg'" alt="" onerror="this.onerror=null;this.src='img/avatars/default_avatar.jpg'">
+                    <span class="employee-status status-${employee.aktivs ? 'aktivs':'neaktivs'} fa fa-circle" title="Lietotāja konta statuss"></span>
+                    <input 
+                        id="file-input" 
+                        accept="image/*" 
+                        file.bind="avatar" 
+                        change.trigger="avatar($event)" 
+                        type="file" 
+                        hidden
+                        disabled.bind="!allowEdit"/>
+                </label>
+                <div class="media-body">
+                    <h5>${employee.pilnsVards} <span if.bind="employee.lietotajvards" class="small text-muted"> @ ${employee.lietotajvards}</span></h5>
+                    <ul if.bind="allowEdit" class="action-links">
+                        <li if.bind="employee.lietotajvards"><a href="#" title="Bloķēt/atbloķēt lietotāja kontu" click.delegate="dispatch('lock')"><i class="fa fa-${employee.aktivs ? 'lock':'unlock'}"></i></a></li>
+                        <li if.bind="employee.lietotajvards"><a href="#" title="Nomainīt paroli" click.delegate="dispatch('password')"><i class="fa fa-gear"></i></a></li>
+                        <li><a href="#/companies/${company.id}/employees/${employee.id}" title="Labot datus"><i class="fa fa-pencil"></i></a></li>
+                        <li><a href="#" title="Dzēst darbinieku" click.delegate="dispatch('delete')"><i class="fa fa-remove"></i></a></li>
+                    </ul>
+                    <div>
+                        <strong>${employee.amats}</strong><br>
+                        <div><i class="fa fa-envelope-o mr-2"></i>${employee.epasts | customerEmail}</div>
+                        <div><i class="fa fa-phone mr-2"></i>${employee.talrunis | customerPhone}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

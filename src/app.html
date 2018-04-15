@@ -1,0 +1,15 @@
+<template>
+	<require from="scss/custom.css"></require>
+	<loading-indicator loading.bind="router.isNavigating || rest.isRequesting"></loading-indicator>
+	<navbar user.bind="user" logout.delegate="logout()"></navbar>
+	<div class="app-body">
+		<sidebar></sidebar>
+		<main class="main">
+			<breadcrumbs items.bind="breadcrumbs"></breadcrumbs>
+			<div class="container-fluid">
+				<router-view></router-view>
+			</div>
+		</main>
+	</div>
+	<compose view="common/footer.html"></compose>
+</template>
