@@ -166,12 +166,12 @@ export class CompanyEdit {
 			errors++;
 		}
 
-		if (this.company.pvnNumurs) {
+		/* if (this.company.pvnNumurs) {
 			this.helpers.removeError('companyPvn');
 		} else {
 			this.helpers.addError('companyPvn', errors == 0);
 			errors++;
-		}
+		} */
 
 		if (this.helpers.validateEmail(this.company.epasts)) {
 			this.helpers.removeError('companyEmail');
