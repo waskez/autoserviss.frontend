@@ -1,12 +1,18 @@
 <template>
   <style>
+    .card-body>a{
+      text-decoration: none;
+      color: inherit;
+    }
     table>tbody>tr>td:first-child,
     table>tbody>tr>td:last-child {
       text-align: center;
     }
-    .table>tbody>tr>td{
+
+    .table>tbody>tr>td {
       vertical-align: middle;
     }
+
     .action-links li {
       margin-bottom: 0;
     }
@@ -17,14 +23,16 @@
       <div class="col-sm-6 col-md-3">
         <div class="card">
           <div class="card-body">
-            <div class="h1 text-muted text-right mb-2">
-              <i class="icon-organization"></i>
-            </div>
-            <div class="h2 mb-0">${status.juridiskasPersonas}</div>
-            <small class="text-muted text-uppercase font-weight-bold">Juridiskās personas</small>
-            <div class="progress progress-xs mt-3 mb-0">
-              <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+            <a href="#/customers/list/2">
+              <div class="h1 text-muted text-right mb-2">
+                <i class="icon-organization"></i>
+              </div>
+              <div class="h2 mb-0">${status.juridiskasPersonas}</div>
+              <small class="text-muted text-uppercase font-weight-bold">Juridiskās personas</small>
+              <div class="progress progress-xs mt-3 mb-0">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
@@ -32,14 +40,16 @@
       <div class="col-sm-6 col-md-3">
         <div class="card">
           <div class="card-body">
-            <div class="h1 text-muted text-right mb-2">
-              <i class="icon-people"></i>
-            </div>
-            <div class="h2 mb-0">${status.fiziskasPersonas}</div>
-            <small class="text-muted text-uppercase font-weight-bold">Fiziskās personas</small>
-            <div class="progress progress-xs mt-3 mb-0">
-              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+            <a href="#/customers/list/1">
+              <div class="h1 text-muted text-right mb-2">
+                <i class="icon-people"></i>
+              </div>
+              <div class="h2 mb-0">${status.fiziskasPersonas}</div>
+              <small class="text-muted text-uppercase font-weight-bold">Fiziskās personas</small>
+              <div class="progress progress-xs mt-3 mb-0">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
@@ -79,29 +89,31 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <i class="fa fa-history"></i> <strong>Remontu vēsture</strong>
+            <i class="fa fa-history"></i>
+            <strong>Remontu vēsture</strong>
           </div>
-          <div class="card-body"> 
-            
+          <div class="card-body">
+
             <form class="mb-2" submit.delegate="tableSettings.loadItems()">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        Ierakstu skaits: <strong class="ml-2">${tableSettings.totalItems}</strong>
-                      </span>
-                    </div>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fa fa-search"></i>
-                      </span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Klients, numurs" value.bind="tableSettings.filter">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary">Meklēt</button>
-                    </span>
-                </div>            
-            </form>                             
-              
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    Ierakstu skaits:
+                    <strong class="ml-2">${tableSettings.totalItems}</strong>
+                  </span>
+                </div>
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                  </span>
+                </div>
+                <input type="text" class="form-control" placeholder="Klients, numurs" value.bind="tableSettings.filter">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary">Meklēt</button>
+                </span>
+              </div>
+            </form>
+
             <table class="table table-responsive-sm table-bordered" aurelia-table="data.bind: tableSettings.items; display-data.bind: $displayData; 
                     current-page.bind: tableSettings.currentPage; page-size.bind: tableSettings.pageSize;">
               <thead>
@@ -121,20 +133,34 @@
                   <td>${rec.numurs}</td>
                   <td>
                     <ul class="action-links">
-                      <li><a href="#/customers/${rec.klientaId}" title="Klienta dati"><i class="fa fa-user"></i></a></li>
-                      <li><a href="#/vehicles/${rec.transportlidzeklaId}" title="Transportlīdzekļa dati"><i class="fa fa-car"></i></a></li>
-                      <li><a href="#/service/sheet/${rec.servisaLapasId}" title="Servisa lapa"><i class="fa fa-cog"></i></a></li>
+                      <li>
+                        <a href="#/customers/${rec.klientaId}" title="Klienta dati">
+                          <i class="fa fa-user"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#/vehicles/${rec.transportlidzeklaId}" title="Transportlīdzekļa dati">
+                          <i class="fa fa-car"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#/service/sheet/${rec.servisaLapasId}" title="Servisa lapa">
+                          <i class="fa fa-cog"></i>
+                        </a>
+                      </li>
                     </ul>
                   </td>
                 </tr>
               </tbody>
               <tbody if.bind="$displayData.length == 0">
-                <tr><td colspan="5" class="text-center">Nav neviena remontu vēstures ieraksta</td></tr>
+                <tr>
+                  <td colspan="5" class="text-center">Nav neviena remontu vēstures ieraksta</td>
+                </tr>
               </tbody>
             </table>
 
             <aut-pagination current-page.bind="tableSettings.currentPage" page-size.bind="tableSettings.pageSize" total-items.bind="tableSettings.totalItems"
-            pagination-size.bind="5" boundary-links.bind="true"> </aut-pagination>
+              pagination-size.bind="5" boundary-links.bind="true"> </aut-pagination>
           </div>
         </div>
       </div>

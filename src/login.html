@@ -27,9 +27,11 @@
                 <form-alert message.bind="alert.message" alert-type.bind="alert.type"></form-alert>
                 <div aubs-collapse="collapsed.bind: emailCollapsed">
                   <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="icon-envelope"></i>
-                    </span>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="icon-envelope"></i>
+                        </span>
+                      </div>
                     <input type="text" class="form-control" id="loginEmail" placeholder="E-pasta adrese" value.bind="email">
                     <span class="input-group-btn">
                       <button class="btn btn-secondary-my" type="button" click.delegate="send()" aubs-btn-loading="loading.bind: isSending; text: <i class='fa fa-refresh fa-spin'></i> Nosūta">
